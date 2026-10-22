@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111311">
+  <meta name="description" content="BugSense AI turns natural-language bug descriptions into structured software bug reports.">
+  <title>BugSense AI — Bug Report Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="BugSense AI home">
+        <span class="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5 31 11.5V24L20 35 9 24V11.5L20 5Z"/><path d="M14 16h12M14 21h8M14 26h5"/><circle cx="27" cy="26" r="4"/></svg></span>
+        <span><strong>BugSense<span> AI</span></strong><small>BUG INTELLIGENCE</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" type="button"><span class="nav-icon">⌘</span> Bug Analyzer <span class="nav-current"></span></button>
+      <a class="nav-item" href="/docs" target="_blank" rel="noreferrer"><span class="nav-icon">↗</span> API Documentation</a>
+      <div class="sidebar-bottom">
+        <div class="status-card"><span class="status-dot"></span><div><strong>AI engine</strong><small>Gemini + LangGraph</small></div><span class="live-pill">READY</span></div>
+        <div class="sidebar-foot">Built for better debugging.<br><span>BugSense AI · v1.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Bug Analyzer</strong></div>
+        <div class="top-right"><span class="secure-label"><span class="tiny-lock">◆</span> AI-ASSISTED ANALYSIS</span><div class="avatar">DX</div></div>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SOFTWARE BUG INTELLIGENCE <span class="eyebrow-line"></span></div>
+        <h1>Make every bug<br> <span>actionable.</span></h1>
+        <p class="hero-copy">Turn a plain-language issue into a structured bug report.<br class="desktop-break"> Understand severity, explore likely causes, and move forward with clarity.</p>
+      </section>
+
+      <section class="workspace-grid">
+        <div class="panel input-panel">
+          <div class="panel-heading">
+            <div class="heading-icon">✳</div><div><h2>Describe the issue</h2><p>Share what happened and what you expected.</p></div>
+          </div>
+          <form id="bug-form">
+            <label for="bug-description">BUG DESCRIPTION <span class="required">*</span></label>
+            <textarea id="bug-description" name="description" maxlength="8000" minlength="10" required placeholder="Example: When I click the login button, nothing happens. The loading indicator never appears and I remain on the login page, even with valid credentials."></textarea>
+            <div class="input-meta"><span>Be specific for more useful suggestions.</span><span id="char-count">0 / 8000</span></div>
+            <div class="examples-heading"><span>TRY AN EXAMPLE</span><span class="examples-line"></span></div>
+            <div class="example-list">
+              <button class="example-chip" type="button" data-example="Checkout fails with a 500 error after I click Place Order. The cart contains valid items, but no confirmation appears.">Checkout failure <span>↗</span></button>
+              <button class="example-chip" type="button" data-example="The password reset email is not received. The page says the request was successful, but the inbox remains empty after several minutes.">Password reset <span>↗</span></button>
+              <button class="example-chip" type="button" data-example="On mobile screens, the navigation menu overlaps the page title and the last menu item cannot be tapped.">Mobile layout <span>↗</span></button>
+            </div>
+            <div class="form-error" id="form-error" role="alert" hidden></div>
+            <button class="primary-button" id="analyze-button" type="submit"><span class="button-spark">✳</span><span id="button-label">Analyze bug report</span><span class="button-arrow">↗</span></button>
+            <p class="privacy-note"><span>◇</span> AI-generated findings are suggestions and should be verified.</p>
+          </form>
+        </div>
+
+        <div class="panel workflow-panel">
+          <div class="panel-heading workflow-title"><div><h2>Analysis workflow</h2><p>Four focused stages. One clear report.</p></div><span class="node-count">04 NODES</span></div>
+          <div class="workflow-list">
+            <div class="workflow-step" data-step="0"><div class="step-icon">⌕</div><div class="step-text"><strong>Bug analysis</strong><small>Extract title, feature & summary</small></div><span class="step-status">WAITING</span></div>
+            <div class="step-connector"></div>
+            <div class="workflow-step" data-step="1"><div class="step-icon">◈</div><div class="step-text"><strong>Severity detection</strong><small>Assess potential impact</small></div><span class="step-status">WAITING</span></div>
+            <div class="step-connector"></div>
+            <div class="workflow-step" data-step="2"><div class="step-icon">⌘</div><div class="step-text"><strong>Root cause suggestions</strong><small>Identify plausible causes</small></div><span class="step-status">WAITING</span></div>
+            <div class="step-connector"></div>
+            <div class="workflow-step" data-step="3"><div class="step-icon">▤</div><div class="step-text"><strong>Format report</strong><small>Compile structured findings</small></div><span class="step-status">WAITING</span></div>
+          </div>
+          <div class="workflow-footer"><span class="pulse-dot"></span><span id="workflow-message">Ready when you are</span><span class="workflow-footer-right">LANGGRAPH</span></div>
+        </div>
+      </section>
+
+      <section class="results-section" id="results-section" hidden>
+        <div class="results-heading"><div><div class="eyebrow left-eyebrow">ANALYSIS OUTPUT</div><h2>Your bug report</h2><p>Review the generated findings before sharing with your team.</p></div><button class="secondary-button" id="copy-button" type="button">▣ <span>Copy report</span></button></div>
+        <div class="report-card">
+          <div class="report-top"><div class="report-symbol">⌘</div><div class="report-title-wrap"><span class="report-kicker">BUG REPORT</span><h3 id="report-title">—</h3></div><span class="severity-badge" id="severity-badge">—</span></div>
+          <div class="report-summary-grid">
+            <div class="report-field"><span class="field-label">AFFECTED FEATURE</span><p id="report-feature">—</p></div>
+            <div class="report-field"><span class="field-label">SEVERITY REASON</span><p id="report-severity-reason">—</p></div>
+          </div>
+          <div class="report-section"><span class="field-label">ISSUE SUMMARY</span><p id="report-summary">—</p></div>
+          <div class="report-section"><span class="field-label">POSSIBLE ROOT CAUSES <span class="hypothesis-tag">HYPOTHESES</span></span><ul id="root-causes"></ul></div>
+          <div class="report-section"><span class="field-label">ORIGINAL DESCRIPTION</span><p class="original-description" id="report-original">—</p></div>
+          <div class="investigation-note"><span class="note-icon">i</span><p id="investigation-notes">Root causes are hypotheses. Verify them using reproduction steps, logs, and code.</p></div>
+          <div class="report-bottom"><span><span class="status-dot"></span> Analysis complete</span><span id="generated-at">Generated by BugSense AI</span></div>
+        </div>
+        <p class="disclaimer">BugSense AI provides AI-generated triage suggestions, not a confirmed diagnosis. Validate severity and root causes against your application, logs, and reproduction steps.</p>
+      </section>
+      <footer class="page-footer"><span>© 2026 BugSense AI</span><span>BUILT WITH GEMINI <span class="footer-dot">·</span> ORCHESTRATED BY LANGGRAPH</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
