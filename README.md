@@ -81,7 +81,7 @@ BugSense-AI/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/BugSense-AI.git
+git clone https://github.com/haniaeman2026-pixel/BugSense-AI.git
 cd BugSense-AI
 ```
 
