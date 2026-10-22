@@ -1,109 +1,165 @@
-# BugSense AI — AI-Powered Bug Report Analyzer
+ <div align="center">
 
-BugSense AI transforms a natural-language software bug description into a structured report using the **Groq API** and a **LangGraph** workflow.
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0B1220,50:172438,100:0B1220&height=220&section=header&text=BugSense%20AI&fontSize=58&fontColor=F2C078&animation=fadeIn&fontAlignY=40&desc=Intelligent%20Bug%20Analysis%20%7C%20Powered%20by%20Groq%20%2B%20LangGraph&descSize=16&descColor=D8E1EE&descAlignY=63" width="100%" alt="BugSense AI Header" />
 
-## Features
+### AI-Powered Bug Report Analyzer
 
-- Bug title, affected feature, and issue summary
-- Severity classification: Critical, High, Medium, or Low
-- Plausible root-cause hypotheses
-- Formatted bug report with an investigation note
-- Professional responsive UI with example prompts and copy-report action
-- FastAPI backend and health endpoint
-- API key loaded from `.env` (never commit the key)
+**Turn bug descriptions into structured insights, severity assessments, and actionable debugging suggestions.**
 
-## LangGraph workflow
+[![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Workflow-1C3C3C?style=for-the-badge)](https://www.langchain.com/langgraph)
+[![Groq](https://img.shields.io/badge/Groq-LLM-F0C078?style=for-the-badge)](https://groq.com/)
 
-`START → Bug Analysis → Severity Detection → Root Cause Suggestion → Format Report → END`
+</div>
 
-The four required processing nodes are separate functions in `app/graph.py`. The report is AI-generated; severity and root causes must be verified against actual impact, logs, reproduction steps, and code.
+---
 
-## Requirements
+## 📌 Overview
 
-- Windows 10/11
-- Python 3.11 or 3.12 recommended
-- Internet connection
-- Groq API key
+**BugSense AI** is an AI-powered developer tool designed to simplify bug analysis. It takes a natural-language bug description and uses an AI workflow to generate a structured report with relevant details for debugging and investigation.
 
-Get an API key from the Groq Console: https://console.groq.com/keys
+The project combines **Groq's language models** with **LangGraph** to organize the analysis into a multi-stage workflow.
 
-## Run on Windows PowerShell
+## ✨ Key Features
 
-Open PowerShell in the `BugSense-AI` folder.
+- 🐛 **Bug Analysis** — Extracts a clear bug title, summary, and affected feature.
+- 🚦 **Severity Detection** — Estimates the severity as Critical, High, Medium, or Low.
+- 🔍 **Root Cause Suggestions** — Provides plausible causes to investigate.
+- 📋 **Structured Reports** — Organizes the findings into a readable report.
+- ⚡ **LangGraph Workflow** — Separates the analysis into four logical stages.
+- 🎨 **Professional UI** — Dark interface with refined gold accents and responsive layouts.
+- 📄 **Copy Report** — Copy analysis results for reference or issue tracking.
 
-### 1. Create and activate a virtual environment
+## ⚙️ How It Works
 
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
+<div align="center">
 
-If Python 3.12 is not installed, use `py -m venv .venv`.
+| Stage | Process | Output |
+|:---:|---|---|
+| 01 | Bug Analysis | Title, summary, affected feature |
+| 02 | Severity Detection | Estimated severity level |
+| 03 | Root Cause Suggestion | Potential causes to investigate |
+| 04 | Report Formatting | Structured bug report |
 
-If PowerShell blocks activation, run this for the current terminal only:
+</div>
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
-```
+## 🛠️ Technology Stack
 
-### 2. Install packages
+| Technology | Purpose |
+|---|---|
+| Python | Core application logic |
+| FastAPI | Backend API |
+| Groq API | Language-model inference |
+| LangGraph | Multi-stage analysis workflow |
+| HTML5 | User interface structure |
+| CSS3 | Responsive styling |
+| JavaScript | Frontend interactions |
 
-```powershell
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-```
-
-### 3. Configure Groq
-
-```powershell
-Copy-Item .env.example .env
-notepad .env
-```
-
-Replace `replace_with_your_groq_api_key` with your own key, save, and close Notepad. Keep `.env` private and do not upload it to GitHub.
-
-### 4. Start the application
-
-```powershell
-python -m uvicorn app.main:app --reload
-```
-
-Open **http://127.0.0.1:8000** in your browser. Keep the terminal open while using the app.
-
-API docs: http://127.0.0.1:8000/docs  
-Health check: http://127.0.0.1:8000/api/health
-
-Stop the server with `Ctrl+C`.
-
-## Troubleshooting
-
-- **Missing API key:** confirm `.env` is in the root `BugSense-AI` folder and contains `GROQ_API_KEY=...`.
-- **Authentication error:** check the key in the Groq Console and ensure your account/model access is available.
-- **Quota/rate limit:** wait and retry, or review your Groq rate limits and usage.
-- **Port already in use:** run `python -m uvicorn app.main:app --reload --port 8001` and open `http://127.0.0.1:8001`.
-- **Dependency/install issue:** use Python 3.11 or 3.12 in a fresh `.venv`, then reinstall `requirements.txt`.
-
-## Project structure
+## 📂 Project Structure
 
 ```text
 BugSense-AI/
+│
 ├── app/
-│   ├── __init__.py
 │   ├── main.py
-│   ├── graph.py
-│   ├── prompts.py
-│   ├── state.py
 │   └── static/
 │       ├── index.html
 │       ├── style.css
 │       └── script.js
+│
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
-## Responsible use
+*The structure above is a reference. Adjust it to match your actual repository files.*
 
-BugSense AI does not inspect the application's source code, runtime, logs, or production environment. Root-cause suggestions are hypotheses based on the description, not confirmed diagnoses. Review all generated output before using it in a real incident or release process.
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/BugSense-AI.git
+cd BugSense-AI
+```
+
+### 2. Create a Virtual Environment
+
+**Windows:**
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install Dependencies
+
+```bash
+py -m pip install -r requirements.txt
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=your_supported_groq_model
+```
+
+Replace the placeholders with your own valid Groq credentials and a model currently available to your account.
+
+**Security:** Never commit your `.env` file or expose your API key in a public repository.
+
+### 5. Run the Application
+
+```bash
+py -m uvicorn app.main:app --reload
+```
+
+Open the application in your browser:
+
+```text
+http://127.0.0.1:8000
+```
+
+*These commands assume your FastAPI entry point is `app/main.py` and your app is exposed as `app`. Adjust them if your implementation differs.*
+
+## 🔐 Security Notes
+
+- Keep API credentials in environment variables.
+- Add `.env` and `.venv/` to `.gitignore`.
+- Validate user input before processing it.
+- Review AI-generated root-cause suggestions before making code changes.
+
+## 🔮 Future Enhancements
+
+- Integration with GitHub Issues.
+- Export reports to Markdown or PDF.
+- Bug history and report management.
+- Automated test suggestions.
+- More detailed debugging recommendations.
+
+## 👩‍💻 Developed By
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0B1220,50:26364B,100:0B1220&height=100&section=footer&text=Hania%20Eman&fontSize=34&fontColor=F2C078&animation=fadeIn&fontAlignY=50" width="100%" alt="Developed by Hania Eman" />
+
+**AI & Data Science Student | Python Developer | AI Project Developer**
+
+*Building practical AI applications through intelligent workflows and thoughtful design.*
+
+</div>
+
+---
+
+<div align="center">
+
+**BugSense AI** · Intelligent Analysis for Better Debugging
+
+<sub>Built with Python, Groq, and LangGraph.</sub>
+
+</div>
